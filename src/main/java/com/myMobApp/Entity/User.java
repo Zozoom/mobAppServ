@@ -1,5 +1,9 @@
 package com.myMobApp.Entity;
 
+/**
+ * This file is represent a USER object from the real world.
+ * */
+
 public class User {
 
     private int id;

@@ -22,11 +22,33 @@ public class UserDao {
         };
     }
 
+    /** Here is where we can get the all User from DB **/
     public Collection<User> getAllUser(){
         return  users.values();
     }
 
+    /** Here is where we can get a User by ID **/
     public User getUserByID(int id){
         return  users.get(id);
+    }
+
+    /** Here is where we can remove a User by ID from DB **/
+    public void deleteUserByID(int id) {
+        users.remove(id);
+    }
+
+    /** Here is where we can update an User in the DB **/
+    public void updateUser(User user) {
+        User u = users.get(user.getId());
+        u.setUserName(user.getUserName());
+        u.setFirstName(user.getFirstName());
+        u.setLastName(user.getLastName());
+        u.setEmailAddress(user.getEmailAddress());
+        users.put(user.getId(), user);
+    }
+
+    /** Here is where we can insert a User in to the DB **/
+    public void insertUser(User user) {
+        users.put(user.getId(),user);
     }
 }
