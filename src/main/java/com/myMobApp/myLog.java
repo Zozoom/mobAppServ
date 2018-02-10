@@ -10,15 +10,15 @@ import java.util.logging.SimpleFormatter;
 public class myLog {
 
     /** Variables **/
-    boolean folderExistResult = false;
+    private boolean folderExistResult = false;
 
     /** Time Stamp **/
-    String timeStamp = new SimpleDateFormat("yyyyMMdd_").format(Calendar.getInstance().getTime());
-    String logTimeStamp = new SimpleDateFormat("yyyy/MM/dd HH:MM:SS").format(Calendar.getInstance().getTime());
+    private String timeStamp = new SimpleDateFormat("yyyyMMdd_").format(Calendar.getInstance().getTime());
+    private String logTimeStamp = new SimpleDateFormat("yyyy/MM/dd HH:MM:SS").format(Calendar.getInstance().getTime());
 
     /** File Pathes **/
-    String filePath = "C:\\Users\\Big-Z\\IdeaProjects\\mobAppServ\\src\\main\\resources\\Logs\\";
-    String fileName = timeStamp+"myLog.log";
+    private String filePath = "C:\\Users\\Big-Z\\IdeaProjects\\mobAppServ\\src\\main\\resources\\Logs\\";
+    private String fileName = timeStamp+"myLog.log";
 
     /** Check the folder is it exist or not if not it will created it. **/
     private void validateFolderExist(String infilePath){
@@ -29,14 +29,16 @@ public class myLog {
             System.out.println("Creating Directory: " + theDir.getName());
 
             try{
-                theDir.mkdir();
-                folderExistResult = theDir.exists();
+                folderExistResult = theDir.mkdir();
             }
             catch(SecurityException se){
-                System.out.println("Something went very wrong...");
+                System.err.println("Something went very wrong...");
             }
             if(folderExistResult) {
                 System.out.println("Directory created: "+infilePath);
+            }
+            else{
+                System.out.println("Directory already exist: "+infilePath);
             }
         }
     }
@@ -53,17 +55,19 @@ public class myLog {
             BufferedWriter bw = new BufferedWriter(fw);
             PrintWriter out = new PrintWriter(bw)){
 
-            /** Here is where the message is writing to the file. **/
+            // Here is where the message is writing to the file. //
             out.println(finalMessage);
             System.out.println(finalMessage);
 
         } catch (IOException e) {
-            //exception handling left as an exercise for the reader
+            System.err.println("Something went very wrong...\n Error: "+e.getMessage());
         } catch (SecurityException e) {
+            System.err.println("Something went very wrong...\n Error: "+e.getMessage());
             e.printStackTrace();
         }
     }
 
+    /** This method get back a new instance of the logger. **/
     public static myLog getBack()
     {
         System.out.println("Return with the Logger Object..");
