@@ -1,8 +1,8 @@
 package com.myMobApp.Service;
 
-import com.myMobApp.Dao.FakeDataUserDaoImpl;
 import com.myMobApp.Dao.UserDao;
 import com.myMobApp.Entity.User;
+import com.myMobApp.myLog;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -13,7 +13,8 @@ import java.util.Collection;
 public class UserService {
 
     @Autowired
-    @Qualifier("mongoDb")
+    //@Qualifier("mongoDb")
+    @Qualifier("fakeData")
     private UserDao userdao;
 
     /** Here is where we can get the all User from DB **/
