@@ -11,6 +11,7 @@ public class myLog {
 
     /** Variables **/
     private boolean folderExistResult = false;
+    private static myLog ownLog = null;
 
     /** Time Stamp **/
     private String timeStamp = new SimpleDateFormat("yyyyMMdd_").format(Calendar.getInstance().getTime());
@@ -19,6 +20,11 @@ public class myLog {
     /** File Pathes **/
     private String filePath = "C:\\Users\\Big-Z\\IdeaProjects\\mobAppServ\\src\\main\\resources\\Logs\\";
     private String fileName = timeStamp+"myLog.log";
+
+    /** Log level enums **/
+    public enum myLogLevel {
+        INFO,WARN,ERROR,STATUS,FATAL,CONNERR,READERR
+    }
 
     /** Check the folder is it exist or not if not it will created it. **/
     private void validateFolderExist(String infilePath){
@@ -44,12 +50,39 @@ public class myLog {
     }
 
     /** This method is the log itself. **/
-    public void log(String logLevel,String message){
+    public void log(myLogLevel myLogLevels,Class classFrom,String message){
 
-        String finalMessage = logTimeStamp+" "+"["+logLevel+"] - ["+getClass().getCanonicalName()+"] Msg: "+message;
+        String finalMessage;
 
         if(!folderExistResult)
             validateFolderExist(filePath);
+
+        switch (myLogLevels) {
+            case INFO:
+                finalMessage = logTimeStamp+" "+"["+myLogLevel.INFO+"] - ["+classFrom.getCanonicalName()+"] INFO: "+message;
+                break;
+            case WARN:
+                finalMessage = logTimeStamp+" "+"["+myLogLevel.WARN+"] - ["+classFrom.getCanonicalName()+"] WARN: "+"!! "+message+" !!";
+                break;
+            case ERROR:
+                finalMessage = logTimeStamp+" "+"["+myLogLevel.ERROR+"] - ["+classFrom.getCanonicalName()+"] ERROR: "+message;
+                break;
+            case STATUS:
+                finalMessage = logTimeStamp+" "+"["+myLogLevel.STATUS+"] - ["+classFrom.getCanonicalName()+"] STATUS: "+"-- "+message+" --";
+                break;
+            case FATAL:
+                finalMessage = logTimeStamp+" "+"["+myLogLevel.FATAL+"] - ["+classFrom.getCanonicalName()+"] FATAL: "+message;
+                break;
+            case CONNERR:
+                finalMessage = logTimeStamp+" "+"["+myLogLevel.CONNERR+"] - ["+classFrom.getCanonicalName()+"] CONNERR: "+"?? "+message+" ??";
+                break;
+            case READERR:
+                finalMessage = logTimeStamp+" "+"["+myLogLevel.READERR+"] - ["+classFrom.getCanonicalName()+"] READERR: "+"?? "+message+" ??";
+                break;
+            default:
+                throw new IllegalArgumentException("Can't yet handle this loglevel: "+myLogLevels);
+        }
+
 
         try(FileWriter fw = new FileWriter(filePath+fileName, true);
             BufferedWriter bw = new BufferedWriter(fw);
@@ -70,8 +103,12 @@ public class myLog {
     /** This method get back a new instance of the logger. **/
     public static myLog getBack()
     {
-        System.out.println("Return with the Logger Object..");
-        return new myLog();
+        if(ownLog == null){
+            System.out.println("Logger Initializing part: There is no logger instance now it will created...");
+            ownLog = new myLog();
+        }
+        System.out.println("Logger Initializing part: Return with the Logger Object..");
+        return ownLog;
     }
 
 }

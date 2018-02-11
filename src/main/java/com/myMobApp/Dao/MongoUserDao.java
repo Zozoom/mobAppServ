@@ -7,6 +7,10 @@ import org.springframework.stereotype.Repository;
 import java.util.ArrayList;
 import java.util.Collection;
 
+/**
+ * This DAO call the The Persistence Layer or DataBase
+ **/
+
 @Repository
 @Qualifier("mongoDb")
 public class MongoUserDao implements UserDao{

@@ -9,6 +9,10 @@ import org.springframework.web.bind.annotation.*;
 import java.awt.*;
 import java.util.Collection;
 
+/**
+ * This Controller calls the Service
+ **/
+
 @RestController
 @RequestMapping("/users")
 public class UserContorller {
