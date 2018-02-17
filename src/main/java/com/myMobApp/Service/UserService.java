@@ -2,6 +2,7 @@ package com.myMobApp.Service;
 
 import com.myMobApp.Dao.UserDao;
 import com.myMobApp.Entity.User;
+import com.myMobApp.myServices.myLog;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -13,8 +14,6 @@ import java.util.Collection;
 
 @Service
 public class UserService {
-
-    myLog logee = myLog.getBack();
 
     @Autowired
     //@Qualifier("mongoDb")

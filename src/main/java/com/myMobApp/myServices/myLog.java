@@ -15,7 +15,7 @@ public class myLog {
     private String logTimeStamp = new SimpleDateFormat("yyyy/MM/dd HH:MM:SS").format(Calendar.getInstance().getTime());
 
     /** File Pathes **/
-    private String filePath = "./src/main/resources/Logs/";
+    private String filePath = "./src/main/Logs/";
     private String fileName = timeStamp+"myLog.log";
 
     /** Log level enums **/

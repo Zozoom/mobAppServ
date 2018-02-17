@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" >
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>MyApp - Userlist</title>
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" th:href="@{https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css}"/>
+        <!-- jQuery library -->
+        <script th:src="@{https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js}"></script>
+        <!-- Latest compiled JavaScript -->
+        <script th:src="@{https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js}"></script>
+        <!-- FAVICON -->
+        <link rel='shortcut icon' type='image/x-icon' th:href="@{images/fav.ico}" />
+        <!-- My Styles -->
+        <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}"/>
+        <!-- Java Scripts -->
+        <script th:src="@{/js/jquery.min.js}"></script>
+    </head>
+
+    <body>
+        <br/>
+        <h1>Welcome!</h1>
+        <br/>
+        <p>Click <a th:href="@{/hello}">here</a> to see a greeting.</p>
+        <br/>
+    </body>
+
+</html>

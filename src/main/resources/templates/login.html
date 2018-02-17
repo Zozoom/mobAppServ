@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>MyApp - Userlist</title>
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" th:href="@{https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css}"/>
+        <!-- jQuery library -->
+        <script th:src="@{https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js}"></script>
+        <!-- Latest compiled JavaScript -->
+        <script th:src="@{https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js}"></script>
+        <!-- FAVICON -->
+        <link rel='shortcut icon' type='image/x-icon' th:href="@{images/fav.ico}" />
+        <!-- My Styles -->
+        <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}"/>
+        <!-- Java Scripts -->
+        <script th:src="@{/js/jquery.min.js}"></script>
+    </head>
+
+    <body>
+
+    <div class="container">
+        <h1>Login Page</h1>
+
+        <br/>
+
+        <div th:if="${param.error}">
+            Invalid username and password.
+        </div>
+        <br/>
+        <div th:if="${param.logout}">
+            You have been logged out.
+        </div>
+
+        <form th:action="@{/login}" method="post">
+            <div><label> User Name : <input type="text" name="username"/> </label></div>
+            <div><label> Password: <input type="password" name="password"/> </label></div>
+            <div><input type="submit" value="Sign In"/></div>
+        </form>
+
+        <br/>
+
+    </div>
+
+
+
+    </body>
+
+</html>
