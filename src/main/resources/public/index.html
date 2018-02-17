@@ -1,14 +1,66 @@
 <!DOCTYPE HTML>
-<html xmlns:th="">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Getting Started: Handling Form Submission</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <div th:replace="fragments/header :: header-css"/>
+    <script  type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script  type="text/javascript">
+        /*<![CDATA[*/
+        $(document).ready(function() {
+            $.getJSON("/users", function(result){
+
+                // Get the headers from JSON
+                $("#customers").append('<tr class="parent"></tr>');
+                $.each(result[0], function(key){
+                    console.log("Head: ["+key+"] "+key);
+                    $("tr.parent").append('<th>'+key.toUpperCase()+'</th>');
+                });
+
+                // Get the Values from the JSON
+                for(var index=0; index < Object.keys(result).length; index++){
+                    $("tr").after('<tr class="result"></tr>');
+                    $.each(result[index], function(key, value){
+                        console.log("Results: [" + index + "] " + key + " - " + value);
+                        if(key === "id"){
+                            $("tr.result:last").append('<td>'+'</td>');
+                            $("td:last").append('<a>'+value+'</a>');
+                        }
+                        else{
+                            $("tr.result:last").append('<td>' + value + '</td>');
+                        }
+
+                    });
+                }
+            });
+        });
+        /*]]>*/
+    </script>
 </head>
 <body>
-<h1>Form</h1>
-    <form action="#" th:action="@{/users}" th:object="${userg}" method="post">
-    <p>Id: <input type="text" th:field="*{id}" /></p>
-    <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
-</form>
+
+<div th:replace="fragments/header :: header"/>
+
+<div class="container">
+
+    <div class="starter-template">
+        <h1>Users List Page</h1>
+
+        <br/>
+
+        <table id="customers">
+        </table>
+
+        <br/>
+
+        <form th:action="@{/logout}" method="post">
+            <input type="submit" value="Sign Out"/>
+        </form>
+
+    </div>
+
+</div>
+<!-- /.container -->
+
+<div th:replace="fragments/footer :: footer"/>
+
 </body>
 </html>

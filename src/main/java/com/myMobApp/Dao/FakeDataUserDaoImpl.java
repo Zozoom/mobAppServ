@@ -1,14 +1,17 @@
 package com.myMobApp.Dao;
 
 import com.myMobApp.Entity.User;
-import com.myMobApp.myLog;
+import com.myMobApp.myServices.RandomString;
+import com.myMobApp.myServices.myLog;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Repository;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
-import static com.myMobApp.myLog.myLogLevel;
+
+import java.awt.image.BufferedImage;
+import java.text.SimpleDateFormat;
+import java.util.*;
+
+import static com.myMobApp.myServices.myLog.myLogLevel;
 
 /**
  * This DAO call the The Persistence Layer or FAKE DATA
@@ -20,16 +23,46 @@ public class FakeDataUserDaoImpl implements UserDao {
 
     myLog logee = myLog.getBack();
 
+    /** Create User Fake DATA **/
+    static private Integer generatedID = (new Random()).nextInt(900000) + 100000;
+    static private String generatedActivationCode =  new RandomString().getGenID();
+    static private String userPassword =  new RandomString().getGenID();
+    static private String userName =  new RandomString().getGenName();
+    static private String userEmail =  new RandomString().getGenEmail();
+
+    static private BufferedImage profilePic = null;
+    static private boolean onlineStatus = Math.random() < 0.5;
+    static private Map<Integer, String> userCity = new HashMap();
+    static private Map<Integer, String> userCountry = new HashMap();
+
+    static private SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:MM:SS");
+    static private String date = sdf.format(new Date());
+
+    /** Create User object from FAKE DATA**/
     private static Map<Integer, User> users;
 
     static {
         users = new HashMap<Integer, User>(){
             {
-                put(1, new User(1,"Blondie","Hair","Blondie","Blondie@email.com"));
-                put(2, new User(2,"Walter","Melon","Walter","Walter@email.com"));
-                put(3, new User(3,"Melon","Gather","Melon","Melon@email.com"));
+                put(1, new User(generatedID,userName,userName,userName,userEmail));
+                reGenerate();
+                put(2, new User(generatedID,userName,userName,userName,userEmail));
+                reGenerate();
+                put(3, new User(generatedID,userName,userName,userName,userEmail));
             }
         };
+    }
+
+    private static void reGenerate(){
+        /** Create User Fake DATA **/
+        generatedID = (new Random()).nextInt(900000) + 100000;
+        generatedActivationCode =  new RandomString().getGenID();
+        userPassword =  new RandomString().getGenID();
+        userName =  new RandomString().getGenName();
+        userEmail =  new RandomString().getGenEmail();
+        onlineStatus = Math.random() < 0.5;
+        sdf = new SimpleDateFormat("yyyy/MM/dd HH:MM:SS");
+        date = sdf.format(new Date());
     }
 
     /** Here is where we can get the all User from DB **/

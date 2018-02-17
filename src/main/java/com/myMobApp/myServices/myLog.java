@@ -1,11 +1,8 @@
-package com.myMobApp;
+package com.myMobApp.myServices;
 
 import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.logging.FileHandler;
-import java.util.logging.Logger;
-import java.util.logging.SimpleFormatter;
 
 public class myLog {
 
@@ -18,7 +15,7 @@ public class myLog {
     private String logTimeStamp = new SimpleDateFormat("yyyy/MM/dd HH:MM:SS").format(Calendar.getInstance().getTime());
 
     /** File Pathes **/
-    private String filePath = "C:\\Users\\Big-Z\\IdeaProjects\\mobAppServ\\src\\main\\resources\\Logs\\";
+    private String filePath = "./src/main/resources/Logs/";
     private String fileName = timeStamp+"myLog.log";
 
     /** Log level enums **/
@@ -59,25 +56,25 @@ public class myLog {
 
         switch (myLogLevels) {
             case INFO:
-                finalMessage = logTimeStamp+" "+"["+myLogLevel.INFO+"] - ["+classFrom.getCanonicalName()+"] INFO: "+message;
+                finalMessage = logTimeStamp+" "+"["+ myLogLevel.INFO+"] - ["+classFrom.getCanonicalName()+"] INFO: "+message;
                 break;
             case WARN:
-                finalMessage = logTimeStamp+" "+"["+myLogLevel.WARN+"] - ["+classFrom.getCanonicalName()+"] WARN: "+"!! "+message+" !!";
+                finalMessage = logTimeStamp+" "+"["+ myLogLevel.WARN+"] - ["+classFrom.getCanonicalName()+"] WARN: "+"!! "+message+" !!";
                 break;
             case ERROR:
-                finalMessage = logTimeStamp+" "+"["+myLogLevel.ERROR+"] - ["+classFrom.getCanonicalName()+"] ERROR: "+message;
+                finalMessage = logTimeStamp+" "+"["+ myLogLevel.ERROR+"] - ["+classFrom.getCanonicalName()+"] ERROR: "+message;
                 break;
             case STATUS:
-                finalMessage = logTimeStamp+" "+"["+myLogLevel.STATUS+"] - ["+classFrom.getCanonicalName()+"] STATUS: "+"-- "+message+" --";
+                finalMessage = logTimeStamp+" "+"["+ myLogLevel.STATUS+"] - ["+classFrom.getCanonicalName()+"] STATUS: "+"-- "+message+" --";
                 break;
             case FATAL:
-                finalMessage = logTimeStamp+" "+"["+myLogLevel.FATAL+"] - ["+classFrom.getCanonicalName()+"] FATAL: "+message;
+                finalMessage = logTimeStamp+" "+"["+ myLogLevel.FATAL+"] - ["+classFrom.getCanonicalName()+"] FATAL: "+message;
                 break;
             case CONNERR:
-                finalMessage = logTimeStamp+" "+"["+myLogLevel.CONNERR+"] - ["+classFrom.getCanonicalName()+"] CONNERR: "+"?? "+message+" ??";
+                finalMessage = logTimeStamp+" "+"["+ myLogLevel.CONNERR+"] - ["+classFrom.getCanonicalName()+"] CONNERR: "+"?? "+message+" ??";
                 break;
             case READERR:
-                finalMessage = logTimeStamp+" "+"["+myLogLevel.READERR+"] - ["+classFrom.getCanonicalName()+"] READERR: "+"?? "+message+" ??";
+                finalMessage = logTimeStamp+" "+"["+ myLogLevel.READERR+"] - ["+classFrom.getCanonicalName()+"] READERR: "+"?? "+message+" ??";
                 break;
             default:
                 throw new IllegalArgumentException("Can't yet handle this loglevel: "+myLogLevels);
